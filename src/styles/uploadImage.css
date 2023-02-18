@@ -46,7 +46,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 0%;
+  margin-left: 1%;
 }
 
 .uploaded-image {
@@ -54,4 +54,8 @@
   max-height: 100%;
   object-fit: contain;
   align-self: flex-start;
+}
+
+#file-upload {
+  display: none;
 }
