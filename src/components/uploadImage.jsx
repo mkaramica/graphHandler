@@ -41,6 +41,15 @@ const UploadImage = () => {
     setIsVisible(false);
   };
 
+  const handleWheel = (event) => {
+    event.preventDefault();
+    const delta = event.deltaY;
+    setRectWidth((prevWidth) => {
+      const newWidth = prevWidth - delta / 10;
+      return newWidth < 0 ? 0 : newWidth;
+    });
+  };
+
   return (
     <div className="upload-container" onMouseMove={handleMouseMove}>
       <div className="upload-controls">
@@ -75,6 +84,12 @@ const UploadImage = () => {
             alt="uploaded"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onWheel={handleWheel}
+          />
+          <img 
+            className="zooming-image"
+            src={imageUrl}
+            alt="zooming"
           />
           {rectPos && isVisible && (
             <div
