@@ -4,6 +4,9 @@ import "../styles/uploadImage.css";
 const UploadImage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [key, setKey] = useState(0);
+  const [rectPos, setRectPos] = useState({ x: 0, y: 0 });
+  const [rectWidth, setRectWidth] = useState(50);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -19,8 +22,27 @@ const UploadImage = () => {
     setKey((prevKey) => prevKey + 1);
   };
 
+  const handleMouseMove = (event) => {
+    setRectPos({ x: event.clientX, y: event.clientY });
+  };
+
+  const handleRectWidthChange = (event) => {
+    const newWidth = parseInt(event.target.value, 10);
+    if (!isNaN(newWidth) && newWidth >= 0) {
+      setRectWidth(newWidth);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setIsVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsVisible(false);
+  };
+
   return (
-    <div className="upload-container">
+    <div className="upload-container" onMouseMove={handleMouseMove}>
       <div className="upload-controls">
         <label htmlFor="file-upload" className="upload-btn">
           Choose Image
@@ -34,11 +56,37 @@ const UploadImage = () => {
         <button className="clear-btn" onClick={handleClearImage}>
           Clear Image
         </button>
+        <label htmlFor="rect-width-input" className="rect-width-label">
+          Rectangle Width:
+        </label>
+        <input
+          id="rect-width-input"
+          type="number"
+          min="0"
+          value={rectWidth}
+          onChange={handleRectWidthChange}
+        />
       </div>
       {imageUrl && (
         <div className="image-container">
-          <img className="uploaded-image" src={imageUrl} alt="uploaded" />
-          
+          <img
+            className="uploaded-image"
+            src={imageUrl}
+            alt="uploaded"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+          {rectPos && isVisible && (
+            <div
+              className="rectangle"
+              style={{
+                left: rectPos.x - rectWidth / 2,
+                top: rectPos.y - rectWidth / 2,
+                width: rectWidth,
+                height: rectWidth,
+              }}
+            />
+          )}
         </div>
       )}
     </div>

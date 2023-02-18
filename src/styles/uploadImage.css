@@ -54,8 +54,19 @@
   max-height: 100%;
   object-fit: contain;
   align-self: flex-start;
+  border: 3px solid #170277;
+  box-sizing: border-box;
 }
 
 #file-upload {
   display: none;
+}
+
+.rectangle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.1);
+  pointer-events: none;
 }
