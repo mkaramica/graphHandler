@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import UploadImage from "./components/uploadImage";
+import PerformImage from "./components/performImage";
 
 function App() {
   return (
     <React.StrictMode>
       <div>
-        <UploadImage />
+        <PerformImage />
       </div>
     </React.StrictMode>
   );
