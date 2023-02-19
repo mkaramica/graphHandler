@@ -1,11 +1,9 @@
 import React from "react";
 
-const ZoomingImage = ({ imageUrl }) => {
+const ZoomingImage = ({ imageUrl, mousePos }) => {
 
-  //const { top, left } = objectPosition || { top: 0, left: 0 };
-
-  const top = 650;
-  const left = 2700;
+  const { x, y } = mousePos || { x: 0, y: 0 };
+  console.log(x,y);
 
   return (
     <img
@@ -14,7 +12,7 @@ const ZoomingImage = ({ imageUrl }) => {
       alt="zooming"
       style={{
         objectFit: "none",
-        objectPosition: `${left} ${top}`,
+        objectPosition: `${x}px ${y}px`,
       }}
     />
   );
