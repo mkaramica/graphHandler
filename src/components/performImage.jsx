@@ -19,7 +19,6 @@ const PerformImage = () => {
   const [mousePos, setmousePos] = useState({ x: 0, y: 0 });
   const [rectWidth, setRectWidth] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
-  
 
   return (
     <div className="upload-container">

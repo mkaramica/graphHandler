@@ -1,6 +1,8 @@
 import React from "react";
 
 const UploadControls = ({ handleImageUpload, handleClearImage, handleRectWidthChange, rectWidth, key }) => {
+  
+  
   return (
     <div className="upload-controls">
       <label htmlFor="file-upload" className="upload-btn">

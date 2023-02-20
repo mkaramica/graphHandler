@@ -54,9 +54,10 @@
   max-height: 100%;
   object-fit: contain;
   align-self: flex-start;
-  border: 3px solid #170277;
+  border: 20px solid #170277;
   box-sizing: border-box;
-  margin-top: 5%;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 #file-upload {
@@ -80,5 +81,5 @@
   border: 3px solid #f00712;
   box-sizing: border-box;
   margin-left: 2%;
-  margin-top: 5%;
+  margin-top: 0%;
 }
