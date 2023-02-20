@@ -1,6 +1,8 @@
 import React from 'react';
 
-const UploadedImage = ({imageUrl, handleMouseEnter, handleMouseLeave, handleWheel}) => {
+const UploadedImage = ({
+  imageUrl, handleMouseEnter, 
+  handleMouseLeave, handleWheel, onLoad }) => {
       
     return (
     <img
@@ -10,6 +12,7 @@ const UploadedImage = ({imageUrl, handleMouseEnter, handleMouseLeave, handleWhee
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onWheel={handleWheel}
+      onLoad={onLoad}
     />
   );
 };

@@ -1,9 +1,20 @@
-export const handleImageUpload = (event, setImageUrl) => {
+export const handleImageUpload = (event, setImageUrl, setOriginalImageInfo) => {
   const file = event.target.files[0];
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onloadend = () => {
     setImageUrl(reader.result);
+    const img = new Image();
+    img.onload = () => {
+      setOriginalImageInfo({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+      });
+      alert(
+        `Original Image size: ${img.naturalWidth} x ${img.naturalHeight} Pixels`
+      );
+    };
+    img.src = reader.result;
   };
 };
 

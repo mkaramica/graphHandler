@@ -41,23 +41,12 @@
 
 .image-container {
   text-align: left;
-  height: 80vh;
+  height: 70vh;
   width: 50%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   margin-left: 1%;
-}
-
-.uploaded-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  align-self: flex-start;
-  border: 20px solid #170277;
-  box-sizing: border-box;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 
 #file-upload {
@@ -73,13 +62,24 @@
   pointer-events: none;
 }
 
-.zooming-image {
-  width: 250px;
-  height: 250px;
+.uploaded-image {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   align-self: flex-start;
-  border: 3px solid #f00712;
+  border: 5px solid #170277;
   box-sizing: border-box;
-  margin-left: 2%;
-  margin-top: 0%;
+  margin-top: 10px;
+  margin-left: 0px;
+}
+
+.zooming-image {
+  width: 300px;
+  height: 300px;
+
+  align-self: flex-start;
+  border: 5px solid #f00712;
+  box-sizing: border-box;
+  margin-left: 5px;
+  margin-top: 10px;
 }
