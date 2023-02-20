@@ -44,7 +44,7 @@ export const handleMouseLeave = (setIsVisible) => {
 
 export const handleWheel = (event, setRectWidth) => {
   const minRectWidth = 5;
-  const widthIncrement = 20;
+  const widthIncrement = -20;
   event.preventDefault();
   const delta = event.deltaY;
   setRectWidth((prevWidth) => {
