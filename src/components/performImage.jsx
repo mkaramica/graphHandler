@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import "../styles/performImage.css";
 import ZoomingImage from "./zoomingImage";
 import ZoomingRectangle from './zoomingRectangle';
@@ -26,6 +25,31 @@ const PerformImage = () => {
   const [imageBoxInfo, setImageBoxInfo] = useState({
     width: 0, height: 0, x: 0, y: 0,borderSize: 0,
   });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const imageEl = document.querySelector(".uploaded-image");
+      if (imageEl) {
+        setImageBoxInfo({
+          width: imageEl.offsetWidth,
+          height: imageEl.offsetHeight,
+          x: imageEl.offsetLeft,
+          y: imageEl.offsetTop,
+          borderSize: parseInt(
+            window
+              .getComputedStyle(imageEl, null)
+              .getPropertyValue("border-top-width"),
+            10
+          ),
+        });
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  
 
   return (
     <div className="upload-container">
@@ -60,6 +84,10 @@ const PerformImage = () => {
                   10
                 ),
               });
+              setOriginalImageInfo({
+                width: event.target.naturalWidth,
+                height: event.target.naturalHeight,
+              });
             }}
           />
           <ZoomingImage 
@@ -77,5 +105,6 @@ const PerformImage = () => {
     </div>
   );
 };
+
 
 export default PerformImage;

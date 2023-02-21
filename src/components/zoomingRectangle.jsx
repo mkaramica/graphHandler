@@ -13,21 +13,23 @@ const ZoomingRectangle = ({ x, y, width }) => {
         }}
       />
       <div
-        className="rectangle"
+        className="line-zoom"
         style={{
-          left: x,
+          left: x-1.2,
           top: y - width / 2,
           width: "1px",
           height: width,
+          boxShadow: "white 0px 0px 1px"
         }}
       />
       <div
-        className="rectangle"
+        className="line-zoom"
         style={{
           left: x - width / 2,
-          top: y,
+          top: y-1.2,
           height: "1px",
           width: width,
+          boxShadow: "white 0px 0px 1px"
         }}
       />
     </div>

@@ -5,10 +5,10 @@ const ZoomingImage = ({
 }) => {
   const [clippedImageUrl, setClippedImageUrl] = useState(null);
 
-  const xBoxStart = mousePos.x - rectWidth/2 - imageBoxInfo.x - imageBoxInfo.borderSize
-  const yBoxStart = mousePos.y - rectWidth/2 - imageBoxInfo.y - imageBoxInfo.borderSize
-  const xBoxEnd = xBoxStart + rectWidth 
-  const yBoxEnd = yBoxStart + rectWidth 
+  const xBoxStart = mousePos.x - rectWidth/2 - imageBoxInfo.x - imageBoxInfo.borderSize + 1
+  const yBoxStart = mousePos.y - rectWidth/2 - imageBoxInfo.y - imageBoxInfo.borderSize + 1
+  const xBoxEnd = xBoxStart + rectWidth -1
+  const yBoxEnd = yBoxStart + rectWidth -1
 
   const scaleRatio = originalImageInfo.width/(imageBoxInfo.width- 2*imageBoxInfo.borderSize)
 
@@ -42,13 +42,39 @@ const ZoomingImage = ({
     return null;
   }
 
+  // Parameters for drawing vertical and horizontal lines:
+  const me = {width: 300, height:300, marginLeft:3,marginTop:10};
+  
+
   return (
-    <img
-      className="zooming-image"
-      src={clippedImageUrl}
-      alt="zooming"
-    />
+    <div style={{position: 'relative'}}>
+      <img
+        className="zooming-image"
+        src={clippedImageUrl}
+        alt="zooming"
+      />
+      <div
+        className="line-zoom"
+        style={{
+          left: me.marginLeft + me.width/2,
+          top: me.marginTop,
+          height: me.height,
+          width: "1px",
+          boxShadow: "white 0px 0px 1px"
+        }}
+      />
+      <div
+        className="line-zoom"
+        style={{
+          left: me.marginLeft,
+          top: me.marginTop+me.height/2,
+          width: me.width,
+          height: "1px",
+          boxShadow: "white 0px 0px 1px"
+        }}
+      />
+    </div>
   );
-};
+  };
 
 export default ZoomingImage;
