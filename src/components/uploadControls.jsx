@@ -14,7 +14,13 @@ const UploadControls = ({ handleImageUpload, handleClearImage, handleRectWidthCh
       <label htmlFor="rect-width-input" className="rect-width-label">
         Rectangle Width:
       </label>
-      <input id="rect-width-input" type="number" min="0" value={rectWidth} onChange={handleRectWidthChange} />
+      <input 
+        id="rect-width-input" 
+        type="number" 
+        min="0" 
+        style={{ backgroundColor: 'yellow' }} 
+        value={rectWidth} 
+        onChange={handleRectWidthChange} />
     </div>
   );
 };

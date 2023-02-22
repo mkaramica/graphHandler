@@ -2,7 +2,7 @@ import React from 'react';
 
 const UploadedImage = ({
   imageUrl, handleMouseEnter, 
-  handleMouseLeave, handleWheel, onLoad }) => {
+  handleMouseLeave, handleWheel, onLoad, onClick }) => {
       
     return (
     <img
@@ -13,6 +13,7 @@ const UploadedImage = ({
       onMouseLeave={handleMouseLeave}
       onWheel={handleWheel}
       onLoad={onLoad}
+      onClick={onClick}
     />
   );
 };

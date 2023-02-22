@@ -89,6 +89,9 @@ const PerformImage = () => {
                 height: event.target.naturalHeight,
               });
             }}
+            onClick={(event) => {
+              console.log(`Mouse location: x=${event.clientX}, y=${event.clientY}`);
+            }}
           />
           <ZoomingImage 
           imageUrl={imageUrl}
