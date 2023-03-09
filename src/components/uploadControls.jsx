@@ -1,6 +1,9 @@
 import React from "react";
 
-const UploadControls = ({ handleImageUpload, handleClearImage, handleRectWidthChange, rectWidth, key }) => {
+const UploadControls = ({ 
+  handleImageUpload, handleClearImage, 
+  handleRectWidthChange,handleZoomingImageSizeChange, 
+  rectWidth, key, zoomingImageSize }) => {
   
   return (
     <div className="upload-controls">
@@ -21,6 +24,17 @@ const UploadControls = ({ handleImageUpload, handleClearImage, handleRectWidthCh
         style={{ backgroundColor: 'yellow' }} 
         value={rectWidth} 
         onChange={handleRectWidthChange} />
+
+      <label htmlFor="zooming-image-size" style={{ marginLeft: '5px' }}>Zooming Image Size:</label>
+
+      <input
+        type="range"
+        min="50"
+        max="500"
+        value={zoomingImageSize}
+        onChange={handleZoomingImageSizeChange}
+      />
+
     </div>
   );
 };

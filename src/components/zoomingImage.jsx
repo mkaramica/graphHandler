@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ZoomingImage = ({ 
-  imageUrl, mousePos,rectWidth, imageBoxInfo, originalImageInfo  
+  imageSize, imageUrl, mousePos,rectWidth, imageBoxInfo, originalImageInfo  
 }) => {
   const [clippedImageUrl, setClippedImageUrl] = useState(null);
 
@@ -43,7 +43,7 @@ const ZoomingImage = ({
   }
 
   // Parameters for drawing vertical and horizontal lines:
-  const me = {width: 300, height:300, marginLeft:3,marginTop:10};
+  const me = {width: imageSize, height:imageSize, marginLeft:3,marginTop:10};
   
 
   return (
@@ -52,6 +52,8 @@ const ZoomingImage = ({
         className="zooming-image"
         src={clippedImageUrl}
         alt="zooming"
+        width={imageSize}
+        height={imageSize}
       />
       <div
         className="line-zoom"
