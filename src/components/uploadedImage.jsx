@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react";
 
 const UploadedImage = ({
-  imageUrl, handleMouseEnter, 
-  handleMouseLeave, handleWheel, onLoad, onClick }) => {
-      
-    return (
+  imageUrl,
+  handleMouseEnter,
+  handleMouseLeave,
+  handleWheel,
+  onLoad,
+  onClick,
+}) => {
+  return (
     <img
       className="uploaded-image"
       src={imageUrl}
