@@ -27,6 +27,7 @@ const PerformImage = () => {
     width: 0, height: 0, x: 0, y: 0,borderSize: 0,
   });
   const [imageSize, setImageSize] = useState(300);
+  const [zoomingImageSize, setZoomingImageSize] = useState(500);
 
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const PerformImage = () => {
         handleImageUpload={(event) => handleImageUpload(event, setImageUrl, setOriginalImageInfo)}
         handleClearImage={() => handleClearImage(setImageUrl, setKey)}
         handleRectWidthChange={(event) => handleRectWidthChange(event, setRectWidth)}
-        handleZoomingImageSizeChange={(event) => handleZoomingImageSizeChange(event, setImageSize)}
+        handleZoomingImageSizeChange={(event) => handleZoomingImageSizeChange(event, setZoomingImageSize)}
         rectWidth={rectWidth}
         key={key}
       />
@@ -98,7 +99,7 @@ const PerformImage = () => {
             }}
           />
           <ZoomingImage 
-          imageSize={imageSize}
+          zoomingImageSize={zoomingImageSize}
           imageUrl={imageUrl}
           mousePos={mousePos}
           rectWidth={rectWidth} 

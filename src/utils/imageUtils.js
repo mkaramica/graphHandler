@@ -34,9 +34,9 @@ export const handleRectWidthChange = (event, setRectWidth) => {
   }
 };
 
-export const handleZoomingImageSizeChange = (event, setImageSize) => {
+export const handleZoomingImageSizeChange = (event, setZoomingImageSize) => {
   const newSize = parseInt(event.target.value, 10);
-  setImageSize(newSize);
+  setZoomingImageSize(newSize);
 };
 
 export const handleMouseEnter = (setIsVisible) => {
