@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "../styles/performImage.css";
 import ZoomingImage from "./zoomingImage";
-import ZoomingRectangle from './zoomingRectangle';
-import UploadedImage from './uploadedImage';
+import ZoomingRectangle from "./zoomingRectangle";
+import UploadedImage from "./uploadedImage";
 import UploadControls from "./uploadControls";
-import { 
+import MousePositionTable from "./mousePositionTable";
+import {
   handleImageUpload,
-  handleClearImage, 
-  handleMouseMove, 
-  handleRectWidthChange, 
+  handleClearImage,
+  handleMouseMove,
+  handleRectWidthChange,
   handleZoomingImageSizeChange,
-  handleMouseEnter, 
-  handleMouseLeave, 
-  handleWheel } from '../utils/imageUtils';
+  handleMouseEnter,
+  handleMouseLeave,
+  handleWheel,
+} from "../utils/imageUtils";
 
 const PerformImage = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -20,15 +22,19 @@ const PerformImage = () => {
   const [mousePos, setmousePos] = useState({ x: 0, y: 0 });
   const [rectWidth, setRectWidth] = useState(50);
   const [isVisible, setIsVisible] = useState(true);
-  const [originalImageInfo, setOriginalImageInfo] = useState({ 
-    width: 0, height: 0 
+  const [originalImageInfo, setOriginalImageInfo] = useState({
+    width: 0,
+    height: 0,
   });
   const [imageBoxInfo, setImageBoxInfo] = useState({
-    width: 0, height: 0, x: 0, y: 0,borderSize: 0,
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0,
+    borderSize: 0,
   });
-  const [imageSize, setImageSize] = useState(300);
-  const [zoomingImageSize, setZoomingImageSize] = useState(500);
 
+  const [zoomingImageSize, setZoomingImageSize] = useState(500);
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,24 +59,30 @@ const PerformImage = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  
 
   return (
     <div className="upload-container">
       <UploadControls
-        handleImageUpload={(event) => handleImageUpload(event, setImageUrl, setOriginalImageInfo)}
+        handleImageUpload={(event) =>
+          handleImageUpload(event, setImageUrl, setOriginalImageInfo)
+        }
         handleClearImage={() => handleClearImage(setImageUrl, setKey)}
-        handleRectWidthChange={(event) => handleRectWidthChange(event, setRectWidth)}
-        handleZoomingImageSizeChange={(event) => handleZoomingImageSizeChange(event, setZoomingImageSize)}
+        handleRectWidthChange={(event) =>
+          handleRectWidthChange(event, setRectWidth)
+        }
+        handleZoomingImageSizeChange={(event) =>
+          handleZoomingImageSizeChange(event, setZoomingImageSize)
+        }
         rectWidth={rectWidth}
         key={key}
+        originalImageInfo={originalImageInfo}
+        imageBoxInfo={imageBoxInfo}
       />
       {imageUrl && (
         <div
-        className="image-container"
-        onMouseMove={(event) => handleMouseMove(event, setmousePos)}
-        
-      >
+          className="image-container"
+          onMouseMove={(event) => handleMouseMove(event, setmousePos)}
+        >
           <UploadedImage
             imageUrl={imageUrl}
             handleMouseEnter={() => handleMouseEnter(setIsVisible)}
@@ -95,32 +107,56 @@ const PerformImage = () => {
               });
             }}
             onClick={(event) => {
-              console.log(`Mouse location: x=${event.clientX}, y=${event.clientY}`);
+              console.log(
+                `Mouse location: x=${event.clientX}, y=${event.clientY}`
+              );
             }}
           />
-          <ZoomingImage 
-          zoomingImageSize={zoomingImageSize}
-          imageUrl={imageUrl}
-          mousePos={mousePos}
-          rectWidth={rectWidth} 
-          originalImageInfo={originalImageInfo}
-          imageBoxInfo={imageBoxInfo} />
-  
           {mousePos && isVisible && (
-            <ZoomingRectangle x={mousePos.x} y={mousePos.y} width={rectWidth} />
+            <div className="zooming-image-wrapper">
+              <ZoomingImage
+                zoomingImageSize={zoomingImageSize}
+                imageUrl={imageUrl}
+                mousePos={mousePos}
+                rectWidth={rectWidth}
+                originalImageInfo={originalImageInfo}
+                imageBoxInfo={imageBoxInfo}
+              />
+
+              <MousePositionTable
+                mousePos={mousePos}
+                imageBoxInfo={imageBoxInfo}
+                originalImageInfo={originalImageInfo}
+              />
+            </div>
+          )}
+
+          {mousePos && isVisible && (
+            <div className="zooming-rectangle-wrapper">
+              <ZoomingRectangle
+                x={mousePos.x}
+                y={mousePos.y}
+                width={rectWidth}
+              />
+            </div>
           )}
         </div>
       )}
+
       <div className="info-section">
         <h2>About Me</h2>
         <p>Name: Mahdi Karami</p>
         <p>Email: mahdi.karami@gmail.com</p>
         <p>Cellphone: (+1) 226-344-7809</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/mahdikarami">https://www.linkedin.com/in/mahdikarami</a></p>
+        <p>
+          LinkedIn:{" "}
+          <a href="https://www.linkedin.com/in/mahdikarami">
+            https://www.linkedin.com/in/mahdikarami
+          </a>
+        </p>
       </div>
     </div>
   );
 };
-
 
 export default PerformImage;

@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from "react";
 
-const ZoomingImage = ({ 
-  zoomingImageSize, imageUrl, mousePos,rectWidth, imageBoxInfo, originalImageInfo  
+const ZoomingImage = ({
+  zoomingImageSize,
+  imageUrl,
+  mousePos,
+  rectWidth,
+  imageBoxInfo,
+  originalImageInfo,
 }) => {
   const [clippedImageUrl, setClippedImageUrl] = useState(null);
 
-  const xBoxStart = mousePos.x - rectWidth/2 - imageBoxInfo.x - imageBoxInfo.borderSize + 1
-  const yBoxStart = mousePos.y - rectWidth/2 - imageBoxInfo.y - imageBoxInfo.borderSize + 1
-  const xBoxEnd = xBoxStart + rectWidth -1
-  const yBoxEnd = yBoxStart + rectWidth -1
+  const xBoxStart =
+    mousePos.x - rectWidth / 2 - imageBoxInfo.x - imageBoxInfo.borderSize + 1;
+  const yBoxStart =
+    mousePos.y - rectWidth / 2 - imageBoxInfo.y - imageBoxInfo.borderSize + 1;
+  const xBoxEnd = xBoxStart + rectWidth - 1;
+  const yBoxEnd = yBoxStart + rectWidth - 1;
 
-  const scaleRatio = originalImageInfo.width/(imageBoxInfo.width- 2*imageBoxInfo.borderSize)
+  const scaleRatio =
+    originalImageInfo.width /
+    (imageBoxInfo.width - 2 * imageBoxInfo.borderSize);
 
-  const xShowOriginalStart = xBoxStart * scaleRatio
-  const yShowOriginalStart = yBoxStart * scaleRatio
-  const xShowOriginalEnd = xBoxEnd * scaleRatio
-  const yShowOriginalEnd = yBoxEnd * scaleRatio
+  const xShowOriginalStart = xBoxStart * scaleRatio;
+  const yShowOriginalStart = yBoxStart * scaleRatio;
+  const xShowOriginalEnd = xBoxEnd * scaleRatio;
+  const yShowOriginalEnd = yBoxEnd * scaleRatio;
 
   useEffect(() => {
     const clippedImage = new Image();
@@ -26,14 +35,16 @@ const ZoomingImage = ({
       canvas.height = yShowOriginalEnd - yShowOriginalStart;
       const context = canvas.getContext("2d");
       context.drawImage(
-        clippedImage, 
-        xShowOriginalStart, yShowOriginalStart,
+        clippedImage,
+        xShowOriginalStart,
+        yShowOriginalStart,
         xShowOriginalEnd - xShowOriginalStart,
         yShowOriginalEnd - yShowOriginalStart,
-        0, 0, 
+        0,
+        0,
         xShowOriginalEnd - xShowOriginalStart,
         yShowOriginalEnd - yShowOriginalStart
-        );
+      );
       setClippedImageUrl(canvas.toDataURL());
     };
   }, [imageUrl, xBoxStart, yBoxStart, xBoxEnd, yBoxEnd]);
@@ -43,11 +54,15 @@ const ZoomingImage = ({
   }
 
   // Parameters for drawing vertical and horizontal lines:
-  const me = {width: zoomingImageSize, height:zoomingImageSize, marginLeft:3,marginTop:10};
-  
+  const me = {
+    width: zoomingImageSize,
+    height: zoomingImageSize,
+    marginLeft: 3,
+    marginTop: 10,
+  };
 
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{ position: "relative" }}>
       <img
         className="zooming-image"
         src={clippedImageUrl}
@@ -58,25 +73,25 @@ const ZoomingImage = ({
       <div
         className="line-zoom"
         style={{
-          left: me.marginLeft + me.width/2,
+          left: me.marginLeft + me.width / 2,
           top: me.marginTop,
           height: me.height,
           width: "1px",
-          boxShadow: "white 0px 0px 1px"
+          boxShadow: "white 0px 0px 1px",
         }}
       />
       <div
         className="line-zoom"
         style={{
           left: me.marginLeft,
-          top: me.marginTop+me.height/2,
+          top: me.marginTop + me.height / 2,
           width: me.width,
           height: "1px",
-          boxShadow: "white 0px 0px 1px"
+          boxShadow: "white 0px 0px 1px",
         }}
       />
     </div>
   );
-  };
+};
 
 export default ZoomingImage;
