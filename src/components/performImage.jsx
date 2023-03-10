@@ -6,6 +6,7 @@ import UploadedImage from "./uploadedImage";
 import UploadControls from "./uploadControls";
 import MousePositionTable from "./mousePositionTable";
 import InfoSection from "./infoSection";
+import CanvasLayer from "./canvasLayer";
 import {
   handleImageUpload,
   handleClearImage,
@@ -113,6 +114,7 @@ const PerformImage = () => {
               );
             }}
           />
+          <CanvasLayer imageBoxInfo={imageBoxInfo} />
           {mousePos && isVisible && (
             <div className="zooming-image-wrapper">
               <ZoomingImage
@@ -131,7 +133,6 @@ const PerformImage = () => {
               />
             </div>
           )}
-
           {mousePos && isVisible && (
             <div className="zooming-rectangle-wrapper">
               <ZoomingRectangle
