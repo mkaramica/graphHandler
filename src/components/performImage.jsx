@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/performImage.css";
 import ZoomingImage from "./zoomingImage";
 import ZoomingRectangle from "./zoomingRectangle";
@@ -16,6 +16,7 @@ import {
   handleMouseEnter,
   handleMouseLeave,
   handleWheel,
+  handleImageClick,
 } from "../utils/imageUtils";
 
 const PerformImage = () => {
@@ -37,6 +38,7 @@ const PerformImage = () => {
   });
 
   const [zoomingImageSize, setZoomingImageSize] = useState(500);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -108,13 +110,11 @@ const PerformImage = () => {
                 height: event.target.naturalHeight,
               });
             }}
-            onClick={(event) => {
-              console.log(
-                `Mouse location: x=${event.clientX}, y=${event.clientY}`
-              );
-            }}
+            onClick={(event) =>
+              handleImageClick(event, imageBoxInfo, canvasRef)
+            }
           />
-          <CanvasLayer imageBoxInfo={imageBoxInfo} />
+          <CanvasLayer imageBoxInfo={imageBoxInfo} canvasRef={canvasRef} />
           {mousePos && isVisible && (
             <div className="zooming-image-wrapper">
               <ZoomingImage

@@ -50,10 +50,51 @@ export const handleMouseLeave = (setIsVisible) => {
 export const handleWheel = (event, setRectWidth) => {
   const minRectWidth = 5;
   const widthIncrement = -20;
-  event.preventDefault();
+  //event.preventDefault();
   const delta = event.deltaY;
   setRectWidth((prevWidth) => {
     const newWidth = prevWidth - delta / widthIncrement;
     return newWidth < minRectWidth ? minRectWidth : newWidth;
   });
 };
+
+export function drawCircle(context, canvasCoorcircle, color) {
+  context.beginPath();
+  context.ellipse(
+    canvasCoorcircle.X,
+    canvasCoorcircle.Y,
+    canvasCoorcircle.radiusX,
+    canvasCoorcircle.radiusY,
+    0,
+    0,
+    2 * Math.PI
+  );
+  context.fillStyle = color;
+  context.fill();
+}
+
+export function handleImageClick(event, imageBoxInfo, canvasRef) {
+  const canvas = canvasRef.current;
+  const context = canvas.getContext("2d");
+  const radius = 7;
+  const imageCoorCircle = {
+    X: event.clientX - imageBoxInfo.x - imageBoxInfo.borderSize + 1,
+    Y: event.clientY - imageBoxInfo.y - imageBoxInfo.borderSize + 1,
+    radius: radius,
+  };
+
+  const canvasRatioX =
+    canvas.width / (imageBoxInfo.width - 2 * imageBoxInfo.borderSize);
+
+  const canvasRatioY =
+    canvas.height / (imageBoxInfo.height - 2 * imageBoxInfo.borderSize);
+
+  const canvasCoorcircle = {
+    X: (imageCoorCircle.X - 1) * canvasRatioX,
+    Y: (imageCoorCircle.Y - 1) * canvasRatioY,
+    radiusX: imageCoorCircle.radius * canvasRatioX,
+    radiusY: imageCoorCircle.radius * canvasRatioY,
+  };
+
+  drawCircle(context, canvasCoorcircle, "red");
+}
