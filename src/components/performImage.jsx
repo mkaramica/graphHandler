@@ -17,6 +17,7 @@ import {
   handleMouseLeave,
   handleWheel,
   handleImageClick,
+  clearCanvas,
 } from "../utils/imageUtils";
 
 const PerformImage = () => {
@@ -68,7 +69,7 @@ const PerformImage = () => {
     <div className="upload-container">
       <UploadControls
         handleImageUpload={(event) =>
-          handleImageUpload(event, setImageUrl, setOriginalImageInfo)
+          handleImageUpload(event, setImageUrl, setOriginalImageInfo, setKey)
         }
         handleClearImage={() => handleClearImage(setImageUrl, setKey)}
         handleRectWidthChange={(event) =>
@@ -81,6 +82,7 @@ const PerformImage = () => {
         key={key}
         originalImageInfo={originalImageInfo}
         imageBoxInfo={imageBoxInfo}
+        canvasRef={canvasRef}
       />
       {imageUrl && (
         <div

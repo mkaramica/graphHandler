@@ -6,7 +6,6 @@ const UploadControls = ({
   handleRectWidthChange,
   handleZoomingImageSizeChange,
   rectWidth,
-  key,
   zoomingImageSize,
   originalImageInfo,
   imageBoxInfo,
@@ -16,12 +15,7 @@ const UploadControls = ({
       <label htmlFor="file-upload" className="upload-btn m-2">
         Choose Image
       </label>
-      <input
-        id="file-upload"
-        key={key}
-        type="file"
-        onChange={handleImageUpload}
-      />
+      <input id="file-upload" type="file" onChange={handleImageUpload} />
       <button className="clear-btn m-2" onClick={handleClearImage}>
         Clear Image
       </button>

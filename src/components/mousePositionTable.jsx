@@ -1,9 +1,10 @@
 import React from "react";
 
 const MousePositionTable = ({ mousePos, imageBoxInfo, originalImageInfo }) => {
-  const scaleRatio =
-    originalImageInfo.width /
-    (imageBoxInfo.width - 2 * imageBoxInfo.borderSize);
+  const imageBoxWidth = imageBoxInfo.width - 2 * imageBoxInfo.borderSize;
+  const scaleRatio = isNaN(imageBoxWidth)
+    ? 1
+    : originalImageInfo.width / imageBoxWidth;
 
   const browserCoor = {
     X: mousePos.x - imageBoxInfo.x - imageBoxInfo.borderSize + 1,
@@ -27,18 +28,18 @@ const MousePositionTable = ({ mousePos, imageBoxInfo, originalImageInfo }) => {
       <tbody>
         <tr>
           <td>Original</td>
-          <td>{originalCoor.X}</td>
-          <td>{originalCoor.Y}</td>
+          <td>{originalCoor.X || 0}</td>
+          <td>{originalCoor.Y || 0}</td>
         </tr>
         <tr>
           <td>Browser</td>
-          <td>{browserCoor.X}</td>
-          <td>{browserCoor.Y}</td>
+          <td>{browserCoor.X || 0}</td>
+          <td>{browserCoor.Y || 0}</td>
         </tr>
         <tr>
           <td>Defined XY</td>
-          <td>{mousePos.x}</td>
-          <td>{mousePos.y}</td>
+          <td>{mousePos.x || 0}</td>
+          <td>{mousePos.y || 0}</td>
         </tr>
       </tbody>
     </table>

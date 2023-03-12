@@ -1,4 +1,13 @@
-export const handleImageUpload = (event, setImageUrl, setOriginalImageInfo) => {
+export const handleImageUpload = (
+  event,
+  setImageUrl,
+  setOriginalImageInfo,
+  setKey
+) => {
+  // clear current image and render it.
+  setImageUrl("");
+  setKey((prevKey) => prevKey + 1);
+
   const file = event.target.files[0];
   const reader = new FileReader();
   reader.readAsDataURL(file);
@@ -97,4 +106,10 @@ export function handleImageClick(event, imageBoxInfo, canvasRef) {
   };
 
   drawCircle(context, canvasCoorcircle, "red");
+}
+
+export function clearCanvas(canvasRef) {
+  const canvas = canvasRef.current;
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
