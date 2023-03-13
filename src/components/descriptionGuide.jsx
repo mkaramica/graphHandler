@@ -1,6 +1,10 @@
 import React from "react";
 
-const ActionDescription = ({ imageBoxInfo }) => {
+const DescriptionGuide = ({
+  imageBoxInfo,
+  mouseClickingMode,
+  giveDescriptionGuide,
+}) => {
   return (
     <div
       style={{
@@ -18,10 +22,10 @@ const ActionDescription = ({ imageBoxInfo }) => {
     >
       <h4 style={{ margin: 0 }}>Action Guide</h4>
       <p style={{ margin: 0, fontSize: "16px" }}>
-        This is a guide for actions you can take on the image
+        {giveDescriptionGuide(mouseClickingMode)}
       </p>
     </div>
   );
 };
 
-export default ActionDescription;
+export default DescriptionGuide;

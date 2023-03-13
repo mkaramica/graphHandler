@@ -7,7 +7,9 @@ import UploadControls from "./uploadControls";
 import MousePositionTable from "./mousePositionTable";
 import InfoSection from "./infoSection";
 import CanvasLayer from "./canvasLayer";
-import ActionDescription from "./actionDescription";
+import DescriptionGuide from "./descriptionGuide";
+import ImageOptions from "./imageOptions";
+
 import {
   handleImageUpload,
   handleClearImage,
@@ -18,6 +20,8 @@ import {
   handleMouseLeave,
   handleWheel,
   handleImageClick,
+  giveDescriptionGuide,
+  calculateDefinedCoordinate,
   clearCanvas,
 } from "../utils/imageUtils";
 
@@ -41,7 +45,19 @@ const PerformImage = () => {
 
   const [zoomingImageSize, setZoomingImageSize] = useState(500);
   const canvasRef = useRef(null);
-
+  const [mouseClickingMode, setMouseClickingMode] = useState(0);
+  const [axisData, setAxisData] = useState({
+    xAxis: {
+      isLogScale: false,
+      P1: { value: 0, coordinate: { X: 0, Y: 0 } },
+      P2: { value: 1, coordinate: { X: 0, Y: 0 } },
+    },
+    yAxis: {
+      isLogScale: false,
+      P1: { value: 0, coordinate: { X: 0, Y: 0 } },
+      P2: { value: 1, coordinate: { X: 0, Y: 0 } },
+    },
+  });
   useEffect(() => {
     const handleResize = () => {
       const imageEl = document.querySelector(".uploaded-image");
@@ -114,11 +130,40 @@ const PerformImage = () => {
               });
             }}
             onClick={(event) =>
-              handleImageClick(event, imageBoxInfo, canvasRef)
+              handleImageClick(
+                event,
+                imageBoxInfo,
+                originalImageInfo,
+                canvasRef,
+                mouseClickingMode,
+                setMouseClickingMode,
+                axisData,
+                setAxisData
+              )
             }
           />
           <CanvasLayer imageBoxInfo={imageBoxInfo} canvasRef={canvasRef} />
-          <ActionDescription imageBoxInfo={imageBoxInfo} />
+          <DescriptionGuide
+            imageBoxInfo={imageBoxInfo}
+            mouseClickingMode={mouseClickingMode}
+            giveDescriptionGuide={giveDescriptionGuide}
+          />
+
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <ImageOptions
+              axisData={axisData}
+              setAxisData={setAxisData}
+              clearCanvas={clearCanvas}
+              onClick={() => clearCanvas(canvasRef, setMouseClickingMode)}
+            />
+            <MousePositionTable
+              mousePos={mousePos}
+              imageBoxInfo={imageBoxInfo}
+              originalImageInfo={originalImageInfo}
+              axisData={axisData}
+              calculateDefinedCoordinate={calculateDefinedCoordinate}
+            />
+          </div>
 
           {mousePos && isVisible && (
             <div className="zooming-image-wrapper">
@@ -129,12 +174,6 @@ const PerformImage = () => {
                 rectWidth={rectWidth}
                 originalImageInfo={originalImageInfo}
                 imageBoxInfo={imageBoxInfo}
-              />
-
-              <MousePositionTable
-                mousePos={mousePos}
-                imageBoxInfo={imageBoxInfo}
-                originalImageInfo={originalImageInfo}
               />
             </div>
           )}
